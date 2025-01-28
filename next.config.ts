@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   },
   // No basePath needed for username.github.io repositories
   // Add any custom domain configurations if needed
+  // Skip icon generation since we're handling it manually
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true,
 };
 
 export default nextConfig;
