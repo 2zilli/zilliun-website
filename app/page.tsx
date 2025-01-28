@@ -26,13 +26,13 @@ export default function Home() {
           
           <div className="bio">
             <div className="line-numbers">
-              {[...Array(6)].map((_, i) => (
+              {[...Array(9)].map((_, i) => (
                 <div key={i}>{i + 1}</div>
               ))}
             </div>
             <p>
-              {">"} My journey has taken me from <span className="highlight">high-level poker</span> to developing 
-              <span className="highlight"> proprietary neural networks</span> for Nash Equilibrium calculations, 
+              {">"} My journey has taken me from <span className="highlight">high-level poker</span> to developing&nbsp;
+              <span className="highlight">proprietary neural networks</span> for Nash Equilibrium calculations, 
               and now to the forefront of <span className="highlight">DeFi innovation</span>. 
             </p>
             <p>
@@ -41,8 +41,8 @@ export default function Home() {
             </p>
             <p>
               {">"} I specialize in transforming complex theoretical concepts into practical solutions,
-              particularly at the intersection of <span className="highlight">game theory</span>, 
-              <span className="highlight"> AI</span>, and <span className="highlight">decentralized finance</span>
+              particularly at the intersection of <span className="highlight">game theory</span>,{" "}
+              <span className="highlight">AI</span>, and <span className="highlight">decentralized finance</span>
               <span className="typing-cursor"></span>
             </p>
           </div>
