@@ -1,15 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',  // Enable static exports
+  output: 'export',
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
-  // No basePath needed for username.github.io repositories
-  // Add any custom domain configurations if needed
-  // Skip icon generation since we're handling it manually
-  skipTrailingSlashRedirect: true,
-  skipMiddlewareUrlNormalize: true,
 };
 
 export default nextConfig;
