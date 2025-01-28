@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true, // Required for static export
   },
   // No basePath needed for username.github.io repositories
+  // Add any custom domain configurations if needed
 };
 
 export default nextConfig;
