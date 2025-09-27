@@ -58,7 +58,7 @@ export default function Home() {
           </div>
 
           <div style={{ marginTop: '2rem' }}>
-            <a href="mailto:me@zilliun.org" className="contact-button">
+            <a href="mailto:me@zilliun.com" className="contact-button">
               $ contact --init
             </a>
           </div>
