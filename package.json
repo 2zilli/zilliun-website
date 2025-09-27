@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "predeploy": "npm run build && touch out/.nojekyll && echo 'zilliun.org' > out/CNAME",
+    "predeploy": "npm run build && touch out/.nojekyll && echo 'zilliun.com' > out/CNAME",
     "deploy": "gh-pages -d out",
     "lint": "next lint"
   },
