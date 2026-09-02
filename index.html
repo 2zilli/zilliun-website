@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zilliun — Philip Hilm</title>
+<meta name="description" content="Zilliun is the home of Philip Hilm. Building Witnis (Verifiable Intelligence), Blomsterbox (connected flower vending), and other things that shouldn't work but do.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3ED;
+    --warm-black: #1A1714;
+    --warm-gray: #6B6560;
+    --accent: #C4854C;
+    --accent-light: #E8CBA8;
+    --subtle: #E8E2D8;
+    --white: #FFFDF9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    color: var(--warm-black);
+    background: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent-light);
+    color: var(--warm-black);
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(247, 243, 237, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 3rem;
+    box-shadow: 0 1px 0 var(--subtle);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--warm-black);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--warm-gray);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--warm-black);
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--warm-black);
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.15rem;
+    color: var(--warm-gray);
+    max-width: 580px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--warm-gray);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ---- SECTIONS ---- */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  /* ---- ABOUT ---- */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--warm-gray);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .about-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .highlight {
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--subtle);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(26, 23, 20, 0.06);
+  }
+
+  .highlight-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .highlight-label {
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+    letter-spacing: 0.03em;
+  }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--subtle), transparent);
+  }
+
+  /* ---- VENTURES ---- */
+  .ventures-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .venture-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--subtle);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: start;
+  }
+
+  .venture-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(26, 23, 20, 0.06);
+  }
+
+  .venture-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  .venture-icon.witnis {
+    background: linear-gradient(135deg, #2D3436, #636E72);
+    color: white;
+  }
+
+  .venture-icon.blomsterbox {
+    background: linear-gradient(135deg, #A8D8A8, #6DB56D);
+    color: white;
+  }
+
+  .venture-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+
+  .venture-role {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .venture-desc {
+    color: var(--warm-gray);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .venture-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.3s ease;
+  }
+
+  .venture-link:hover {
+    gap: 0.7rem;
+  }
+
+  /* ---- STORY SECTION ---- */
+  .story {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .timeline-item {
+    padding: 1.5rem;
+    border-left: 2px solid var(--subtle);
+    transition: border-color 0.3s;
+  }
+
+  .timeline-item:hover {
+    border-left-color: var(--accent);
+  }
+
+  .timeline-year {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-event {
+    font-size: 0.9rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  /* ---- CONTACT ---- */
+  .contact {
+    padding: 6rem 3rem 8rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--subtle);
+    border-radius: 50px;
+    color: var(--warm-black);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    background: var(--warm-black);
+    color: var(--white);
+  }
+
+  .contact-aside {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--warm-gray);
+    opacity: 0.6;
+    text-align: right;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 2rem 3rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.75rem; }
+
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-scroll { display: none; }
+
+    section, .story, .contact { padding: 4rem 1.5rem; }
+    .divider { padding: 0 1.5rem; }
+
+    .about-content { grid-template-columns: 1fr; gap: 2rem; }
+    .about-highlights { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .venture-card {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .venture-icon { margin-bottom: 0.5rem; }
+
+    .timeline { grid-template-columns: 1fr 1fr; }
+
+    .contact-content {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .contact-aside {
+      text-align: left;
+      max-width: 100%;
+    }
+
+    .contact-links {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-highlights { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">zilliun</a>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Stockholm, Sweden</div>
+  <h1>Building things that <em>shouldn't work</em> but do.</h1>
+  <p class="hero-sub">Zilliun is Philip Hilm's company and the home of Witnis and Blomsterbox. The name means a zillion possibilities, and also "silly one" — because taking on the impossible should be fun.</p>
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</header>
+
+<!-- STORY -->
+<section id="story">
+  <div class="about-content">
+    <div class="about-text reveal">
+      <div class="section-label">Story</div>
+      <h2 class="section-title">Poker pro turned<br>AI researcher turned<br>flower machine guy.</h2>
+      <p>I've spent my life chasing hard problems. I started coding on a Commodore 64, played professional poker for almost a decade (including the 2007 WSOP Main Event final table as chip leader), then built a Nash equilibrium solver for extensive-form games because the math fascinated me more than the cards.</p>
+      <p>That led to AI research at GoodAI in Prague, a TEDx talk, algorithmic trading in crypto, developer advocacy at ChromaWay, and now — building physical products and platforms that connect the digital and real worlds.</p>
+      <p>The thread? Moving the state of the art. Doing what seems impossible until it isn't. And not taking myself too seriously along the way.</p>
+    </div>
+    <div class="about-highlights reveal">
+      <div class="highlight">
+        <div class="highlight-number">2007</div>
+        <div class="highlight-label">WSOP Main Event final table, chip leader</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-number">TEDx</div>
+        <div class="highlight-label">Speaker, Prague — AI vs Human Intelligence</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-number">6</div>
+        <div class="highlight-label">Countries lived in — DK, PL, NL, UK, CZ, SE</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-number">C64</div>
+        <div class="highlight-label">Where it all started, self-taught from day one</div>
+      </div>
+    </div>
+  </div>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-year">Late '80s</div>
+      <div class="timeline-event">Self-taught programming on a Commodore 64 in Denmark</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2000</div>
+      <div class="timeline-event">Mobile app development in C++ at Generation M, Copenhagen</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2002–09</div>
+      <div class="timeline-event">Professional poker player across Europe and the US. WSOP Main Event final table 2007</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2009–15</div>
+      <div class="timeline-event">Built a Nash equilibrium solver for extensive-form games in Prague</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2015–16</div>
+      <div class="timeline-event">Senior AI Researcher at GoodAI. TEDx Prague speaker</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2017–22</div>
+      <div class="timeline-event">Algorithmic trading and crypto fund management with Tavis Digital</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-event">Founded Zilliun AB in Stockholm</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024–26</div>
+      <div class="timeline-event">Developer Advocate at ChromaWay (Chromia blockchain)</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-event">Co-founded Blomsterbox. First machine goes live</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2026</div>
+      <div class="timeline-event">Launched Witnis. Region Stockholm becomes first pilot</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- VENTURES -->
+<section id="ventures">
+  <div class="section-label reveal">Current Ventures</div>
+  <h2 class="section-title reveal">What I'm building now.</h2>
+  <div class="ventures-grid">
+
+    <div class="venture-card reveal">
+      <div class="venture-icon witnis">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div>
+        <div class="venture-name">Witnis</div>
+        <div class="venture-role">CEO & Co-founder</div>
+        <p class="venture-desc">A Verifiable Intelligence platform for public-sector and regulated organizations. Witnis lets organizations cryptographically sign their communications so anyone can verify authenticity. Paste something you found online, and Witnis tells you whether the organization actually published it — using hash comparison and semantic search. Provenance, not fact-checking. Region Stockholm is our first pilot client.</p>
+        <a href="https://www.witnis.se" class="venture-link" target="_blank" rel="noopener">Learn more &rarr;</a>
+      </div>
+    </div>
+
+    <div class="venture-card reveal">
+      <div class="venture-icon blomsterbox">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m3 4.5a4.5 4.5 0 1 0 4.5-4.5M12 16.5V15m4.5-3H15"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <div>
+        <div class="venture-name">Blomsterbox</div>
+        <div class="venture-role">Co-founder</div>
+        <p class="venture-desc">A network of premium, IoT-connected flower vending machines across Sweden. These aren't repurposed fridges — they're purpose-built, climate-controlled machines with app integration and locked compartments. The model connects independent florists to the machine network: florists stock and price their products, Blomsterbox provides the platform and distribution. First machine live at Åkersberga Centrum, with expansion underway across Stockholm.</p>
+        <a href="https://blomsterbox.se" class="venture-link" target="_blank" rel="noopener">Learn more &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- CONTACT -->
+<div class="contact" id="contact">
+  <div class="section-label reveal">Get in Touch</div>
+  <h2 class="section-title reveal">Let's talk.</h2>
+  <div class="contact-content reveal">
+    <div>
+      <p style="color: var(--warm-gray); font-size: 1.05rem; max-width: 480px; margin-bottom: 1.5rem; line-height: 1.8;">Whether it's about Witnis, Blomsterbox, a collaboration, or something I haven't thought of yet — I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a href="mailto:philip@zilliun.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          philip@zilliun.com
+        </a>
+        <a href="https://www.linkedin.com/in/philip-hilm" class="contact-link" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="contact-aside">
+      "Zilli un" — the silly one.<br>Serious about the work,<br>never about myself.
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 Zilliun AB &middot; Stockholm, Sweden
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
